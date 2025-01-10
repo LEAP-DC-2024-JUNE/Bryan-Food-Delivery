@@ -1,5 +1,3 @@
 export default function Home() {
-  return (
-	  <div>Food Delivery</div>
-  );
+  return <div className="">Food Delivery</div>;
 }

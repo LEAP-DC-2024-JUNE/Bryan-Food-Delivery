@@ -7,8 +7,8 @@ import { usePathname } from "next/navigation";
 const Header = () => {
   const path = usePathname();
   return (
-    <div className="min-w-[1440px]">
-      <div className="flex items-center justify-between w-[1258px] mx-auto py-2 px-6">
+    <div className="fixed top-0 bg-white w-full">
+      <div className="flex items-center justify-between min-w-[1440px] w-[1258px] mx-auto py-2 px-6">
         <div className="flex gap-6">
           <div className="p-1">
             <PineconeLogo />

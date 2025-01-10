@@ -1,5 +1,11 @@
+import LoginForm from "@/components/LoginForm";
+
 const LoginPage = () => {
-  return <div>Login Page</div>;
+  return (
+    <div className="pt-[111px]">
+      <LoginForm modal={false} />
+    </div>
+  );
 };
 
 export default LoginPage;

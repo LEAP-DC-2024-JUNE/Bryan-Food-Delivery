@@ -27,6 +27,12 @@ const LoginForm = ({ modal }) => {
   useEffect(() => {
     setIsEmpty(data.email === "" || data.password === "");
   }, [data]);
+
+  const handleSignupClick = (e) => {
+    e.preventDefault();
+    router.push("/signup");
+  };
+
   return (
     <div className="flex flex-col items-center gap-12 p-8 w-min mx-auto rounded-2xl bg-white">
       <h1 className="text-3xl font-bold">Нэвтрэх</h1>
@@ -85,13 +91,13 @@ const LoginForm = ({ modal }) => {
           Нэвтрэх
         </button>
         <p className="text-sm text-gray-700">Эсвэл</p>
-        <Link
-          href={"/signup"}
+        <button
           className="py-2 px-4 rounded-[4px] border-[1px] border-green-600 w-full text-center
-                          hover:bg-green-600 hover:text-white focus:bg-green-600 focus:text-white"
+                          hover:bg-green-600 hover:text-white"
+          onClick={handleSignupClick}
         >
           Бүртгүүлэх
-        </Link>
+        </button>
         {modal && (
           <button
             onClick={router.back}

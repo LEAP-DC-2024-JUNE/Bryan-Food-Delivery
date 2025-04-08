@@ -1,18 +1,19 @@
 import express from "express";
 import dotenv from "dotenv";
+import { connectDB } from "./config/mongo-db.js";
+import foodCategoryRouter from "./routers/food-category.router.js";
+import foodRouter from "./routers/food.router.js";
 
 dotenv.config();
+
+connectDB();
 
 const server = express();
 
 server.use(express.json());
 
-server.get("", (request, response) => {
-  response.json({
-    success: true,
-    message: "Hello",
-  });
-});
+server.use("/food-category", foodCategoryRouter);
+server.use("/food", foodRouter);
 
 const PORT = process.env.PORT;
 

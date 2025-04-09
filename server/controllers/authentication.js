@@ -4,8 +4,8 @@ import bcrypt from "bcryptjs";
 import dotenv from "dotenv";
 dotenv.config();
 
-const generateToken = (id, email) => {
-  return jwt.sign({ id, email }, process.env.JWT_SECRET_KEY, {
+const generateToken = (id) => {
+  return jwt.sign({ id }, process.env.JWT_SECRET_KEY, {
     expiresIn: process.env.JWT_EXPIRES_IN,
   });
 };
@@ -30,7 +30,7 @@ export const signIn = async (request, response) => {
     const user = await User.findOne({ email }).select("+password");
     const isValid = bcrypt.compareSync(password, user.password);
     if (isValid) {
-      const token = generateToken();
+      const token = generateToken(user._id);
       response.json({
         succes: true,
         token,
@@ -58,7 +58,7 @@ export const signUp = async (request, response) => {
       password: hashedPassword,
     });
 
-    const token = generateToken(user._id, user.email);
+    const token = generateToken(user._id);
 
     response.json({
       succes: true,

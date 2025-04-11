@@ -6,12 +6,14 @@ import {
   getFood,
   updateFood,
 } from "../controllers/food.js";
+import { createFoodGroup } from "../controllers/food-group.js";
 
 const router = express.Router();
 
 router.post("", createFood);
 
 router.get("", getAllFoods);
+router.get("/grouped", createFoodGroup);
 
 router.get("/:id", getFood);
 

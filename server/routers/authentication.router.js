@@ -1,5 +1,6 @@
 import express from "express";
 import {
+  getUser,
   refresh,
   resetPassword,
   resetPasswordRequest,
@@ -11,6 +12,8 @@ import {
 const router = express.Router();
 
 router.get("/refresh", refresh);
+
+router.get("/user", getUser);
 
 router.post("/sign-in", signIn);
 

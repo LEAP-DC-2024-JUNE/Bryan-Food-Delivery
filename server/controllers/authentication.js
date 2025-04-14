@@ -13,9 +13,35 @@ const generateToken = (id) => {
 export const refresh = async (request, response) => {
   try {
     response.json({
-      succes: true,
+      success: true,
       message: "Hello (Authentication)",
     });
+  } catch (error) {
+    response.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+export const getUser = async (request, response) => {
+  try {
+    const header = request.headers["authorization"];
+    const token = header.split(" ")[1];
+    const data = jwt.verify(token, process.env.JWT_SECRET_KEY);
+    const id = data.id;
+    const user = await User.findById(id);
+    if (!user || data.exp * 1000 < Date.now()) {
+      response.json({
+        success: false,
+        message: "Bad token",
+      });
+    } else {
+      response.json({
+        success: true,
+        email: user.email,
+      });
+    }
   } catch (error) {
     response.status(500).json({
       success: false,
@@ -32,7 +58,7 @@ export const signIn = async (request, response) => {
     if (isValid) {
       const token = generateToken(user._id);
       response.json({
-        succes: true,
+        success: true,
         token,
       });
     } else {
@@ -61,7 +87,7 @@ export const signUp = async (request, response) => {
     const token = generateToken(user._id);
 
     response.json({
-      succes: true,
+      success: true,
       user,
       token,
     });
@@ -76,7 +102,7 @@ export const signUp = async (request, response) => {
 export const resetPasswordRequest = async (request, response) => {
   try {
     response.json({
-      succes: true,
+      success: true,
       message: "Hello (Authentication)",
     });
   } catch (error) {
@@ -90,7 +116,7 @@ export const resetPasswordRequest = async (request, response) => {
 export const verifyResetPasswordRequest = async (request, response) => {
   try {
     response.json({
-      succes: true,
+      success: true,
       message: "Hello (Authentication)",
     });
   } catch (error) {
@@ -104,7 +130,7 @@ export const verifyResetPasswordRequest = async (request, response) => {
 export const resetPassword = async (request, response) => {
   try {
     response.json({
-      succes: true,
+      success: true,
       message: "Hello (Authentication)",
     });
   } catch (error) {

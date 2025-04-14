@@ -1,18 +1,14 @@
-import Icon from "./Icons";
+import { Logo } from "./Icons";
 
-const LogoContainer = ({ vertical = false }: { vertical?: boolean }) => {
+const LogoContainer = ({ vertical }: { vertical: boolean }) => {
   return (
-    <div className={`flex ${vertical && "flex-col"} items-center gap-3`}>
-      <div className="fill-logo-red">
-        <Icon name="logo" />
-      </div>
+    <div className={`flex ${vertical && "flex-col items-center"} gap-3`}>
+      <Logo />
       <div>
-        <h4 className="text-xl font-semibold">
-          Nom<span className="text-logo-red">Nom</span>
-        </h4>
-        <p className="text-xs font-normal text-text-secondary">
-          Swift delivery
-        </p>
+        <h1 className="font-semibold text-xl text-[#FAFAFA]">
+          Nom<span className="text-[#EF4444]">Nom</span>
+        </h1>
+        <p className="font-normal text-xs text-[#F4F4F5]">Swift delivery</p>
       </div>
     </div>
   );

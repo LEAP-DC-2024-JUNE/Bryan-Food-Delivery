@@ -1,51 +1,33 @@
-import Icon from "./Icons";
+import { Icon } from "./Icons";
 
-type PrimaryProps = {
+type ButtonProps = {
+  text: string;
   icon: string;
   color: "white" | "red";
+  onClick?: () => void;
 };
-export const PrimaryButton = ({ icon, color }: PrimaryProps) => {
-  let colorClass;
+
+const Button = ({ text, icon, color, onClick }: ButtonProps) => {
+  let colorStyle;
   switch (color) {
     case "white":
-      colorClass = "bg-bg-secondary stroke-text-secondary-foreground";
+      colorStyle = "text-[#18181B] stroke-[#18181B] bg-[#F4F4F5]";
       break;
     case "red":
-      colorClass = "bg-logo-red stroke-text-primary-foreground";
-      break;
+      colorStyle = "text-[#FAFAFA] stroke-[#FAFAFA] bg-[#EF4444]";
+  }
+  if (icon !== "none") {
+    colorStyle += " w-9 h-9";
   }
   return (
     <button
-      className={`py-2 px-3 w-9 h-9 rounded-full 
-                    ${colorClass}
-                    text-sm font-medium cursor-pointer`}
+      className={`${colorStyle} py-2 px-3 rounded-full cursor-pointer`}
+      onClick={onClick}
     >
+      {text}
       <Icon name={icon} />
     </button>
   );
 };
 
-type SecondaryProps = {
-  text: string;
-  color: "white" | "red";
-};
-export const SecondaryButton = ({ text, color }: SecondaryProps) => {
-  let colorClass;
-  switch (color) {
-    case "white":
-      colorClass = "bg-bg-secondary text-text-secondary-foreground";
-      break;
-    case "red":
-      colorClass = "bg-logo-red text-text-primary-foreground";
-      break;
-  }
-  return (
-    <button
-      className={`py-2 px-3 rounded-full 
-                    ${colorClass}
-                    text-sm font-medium cursor-pointer`}
-    >
-      {text}
-    </button>
-  );
-};
+export default Button;
